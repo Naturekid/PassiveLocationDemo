@@ -22,6 +22,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.io.File;
+import java.util.Calendar;
+import java.util.Date;
+
 public class MainActivity extends Activity {
 
     private final String TAG = "MainActivity";
@@ -33,12 +37,16 @@ public class MainActivity extends Activity {
     private int minDis = 10;//米
     private int minTime = 10000;//毫秒
     private String locStr = "";
+    private String statFile ;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
 
         mTextView = (TextView) findViewById(R.id.location);
         mButton = (Button) findViewById(R.id.locationBtn);
@@ -144,6 +152,23 @@ public class MainActivity extends Activity {
         }
         manager.requestLocationUpdates(LocationManager.PASSIVE_PROVIDER,
                 minTime, minDis, listener);
+    }
+
+
+    private void saveData(String str){
+
+        Date now = new Date();
+        Calendar cal = Calendar.getInstance();
+
+        statFile = this.getFilesDir() + "/" + cal.toString() + "_stat";
+
+        File toFile = new File(statFile);
+        if(!toFile.exists()){
+
+        }
+
+
+
     }
 
 }
